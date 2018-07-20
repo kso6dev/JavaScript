@@ -67,3 +67,102 @@ var startmsg = "Votre catégorie: ", endmsg;
 var adult = confirm("Etes vous majeur? ");
 endmsg = adult ? "18+" : "-18";
 alert(startmsg + endmsg);
+
+var number = 0;
+var output = number++; // on incrémente après assignation
+//alert(number); // Affiche : « 1 »
+//alert(output); // Affiche : « 0 »
+number = 0;
+output = ++number; // on incrémente avant assignation
+//alert(number); // Affiche : « 1 »
+//alert(output); // Affiche : « 1 »
+
+var nb = 0;
+while (nb < 10){
+    nb++;
+}
+
+do{
+    nb--;
+} while (nb > 0)
+
+for (nb = 0; nb < 3; nb++){
+    alert(nb);
+}
+
+for (var i = 0, str = ""; i < 10; i++){
+    str += i;
+}
+alert(str);
+
+
+function sumnb(a, b, c){
+    var sumres = parseInt(a) + parseInt(b);
+    return (sumres);
+}
+
+var ab = sumnb(1, 3); // a = 1, b = 3, c = false
+
+//fonction anonyme:
+var sayHi = function(){
+    alert("Hi!");
+};// ne pas oublier le point virgule!!!
+
+sayHi();
+
+//isoler son code
+(function(){
+    //code isolé
+    var localVar = 0;
+})();
+
+
+// les objets
+var myStr = "ceci est une chaine de caract";
+var strlen = myStr.length;
+myStr = myStr.toUpperCase();
+
+//nous avons déjà vu les string, number et boolean
+// voici maintenant les array
+var myArray = ["Ben", "Soso", "Toto", "Kaka", "Kiki"];
+var myArray2 = ["Benji", 31, "Soso", 30, 12, 14, false];
+
+myArray.push("Nono");//ajoute Nono en fin de tableau
+myArray.push("Axel", "Aimy");//ajoute les 2 en fin
+myArray.unshift("Francis");//ajoute au début du tableau
+
+
+myArray.pop();//retire le dernier donc Kiki
+myArray.shift();//retire le premier donc Francis
+
+var strArr = myStr.split(" ");//split un string par rapport à un séparateur et met valeurs dans un tableau
+
+myStr = strArr.join(" ");//transformer array en string
+
+//ATTENTION: c'est pas beau de demander length à chaque tour de boucle
+//for (var i = 0; i < myArray.length; i++){
+//c'est mieux de définir une var qui contient length
+for (var i = 0, len = myArray.length; i < len; i++){
+    alert(myArray[i]);
+}
+
+var family = {
+    me: "Ben",
+    gf: "Sonia",
+    sis: "Stephanie",
+    mum: "Annick",
+    dad: "Francis"
+};
+
+alert(family.sis);
+var id = "gf";
+alert(family[id]);
+family["cousin"] = "Bruno";
+alert(family.cousin);
+
+for (var id in family){
+    alert(family[id]);
+}
+
+
+alert("fin");
