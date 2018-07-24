@@ -156,13 +156,64 @@ var family = {
 
 alert(family.sis);
 var id = "gf";
-alert(family[id]);
+//alert(family[id]);
+console.log(family[id]);
 family["cousin"] = "Bruno";
-alert(family.cousin);
+//alert(family.cousin);
+console.log(family.cousin);
 
 for (var id in family){
-    alert(family[id]);
+    //alert(family[id]);
+    console.log(family[id]);
 }
 
+// erreur qu'on pourra voir dans la console du
+// kit de dev du navigateur web (F12)
+//var t = u;
+
+for (var i = 0; i < 10; i++){
+    //on affiche les valeurs de i dans la console
+    console.log("valeur de i = " + i);
+}
+
+var helloObj = {
+    english: "Hello",
+    french: "Bonjour",
+    spanish: "Hola"
+};
+
+console.log(helloObj);
+
+console.warn("warning msg");
+console.error("error msg");
+
+console.group("testgroup");
+
+console.groupEnd();
+
+
+function fcta(value){
+    console.log(value);
+}
+
+function fctb(value){
+    fcta(value + 1);
+}
+
+function fctc(value){
+    fctb(value + 1);
+}
+
+for (var i = 0; i < 10; i++){
+    fctc(i);
+}
+
+(function(){
+    console.log("anonymous");
+})();
+
+(function anonymousFunction(){
+    console.log("not so anonymous");
+})();
 
 alert("fin");
