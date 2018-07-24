@@ -226,6 +226,8 @@ for (var i = 1, len = tp2txt.length; i < len; i++)
 tp2div.appendChild(tp2p);
 tp2div.appendChild(tp2ul);
 tpheader.appendChild(tp2div);
+tp2div.setAttribute("onclick","alert('voici le contenu de cet element : ' + this.innerHTML)");
+
 
 //récupérer leurs propriétés
 var headertype = headerparent.nodeType; 
