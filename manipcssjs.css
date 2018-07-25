@@ -1,0 +1,34 @@
+div {
+    background-color: blueviolet;
+    cursor: crosshair;
+}
+
+#parent {
+    position: absolute;
+    height: 400px;
+    margin-left: 450px;
+    margin-top: 150px;
+}
+
+#child {
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 60px;
+}
+
+#main_wraper{
+    position: absolute;
+}
+
+#dragdiv {
+    position: absolute;
+    background-color: blue;
+    width: 50px;
+    height: 50px;
+    /* L'utilisateur ne pourra plus sélectionner le texte de l'élément qui possède cette propriété CSS */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: -webkit-grab; /* affiche un curseur différent */
+}

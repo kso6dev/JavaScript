@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="generalstyle.css">
+        <meta charset="utf-8" />
+        <title>Javascript test</title>
+    </head>
+    <body>
+        <div id="main_wraper">
+            <header>
+                <form id="myform" method="post" action="traitement.php">
+                    <p>
+                        Je test un form method="post", action="traitement.php" (page fictive)
+                    </p>
+                    <fieldset>
+                        <legend>Des champs lambda</legend>
+                        <p>
+                            <input type="text" name="inputempty" />
+                            <br/>
+                            <label>Votre pseudo</label>: <input type="text" name="pseudo" />
+                            <br />
+                            <label for="realpseudo">Votre vrai pseudo</label>: <input type="text" name="realpseudo" id="realpseudo" />
+                            <br />
+                            <label for="sized">Champ taille définie et longueur max</label>: <input type="text" name="sized" id="sized" size="50" maxlength="10" />
+                            <br />
+                            <label for="defaultval">Champ avec valeur par défault</label>: <input type="text" name="defaultval" id="defaultval" value="Saucisse"/>
+                            <br />
+                            <label for="firstlastname">Champ avec indication placeholder</label>: <input type="text" name="firstlastname" id="firstlastname" placeholder="Nom + Prénom" autofocus />
+                            <br />
+                            <label for="mdp">Mot de passe</label> : <input type="password" name="mdp" id="mdp" placeholder="Votre mot de passe" minlength="5" required/>
+                        </p>
+                    </fieldset>
+                    
+                    <p>
+                        <label for="zone">Et voici une zone de text</label> : <br />
+                        <textarea name="zone" id="zone"></textarea>
+                    </p>
+                    <p>
+                        <label for="bigzone">et voici une zone plus grande</label> : <br />
+                        <textarea name="bigzone" id="bigzone" rows="10" cols="50"></textarea>
+                    </p>
+                    <p>
+                        Cochez ce qui vous fait plaisir.. <br />
+                        <label for="dog">chien</label> <input type="checkbox" name="dog" id="dog" />
+                        <label for="cat">chat</label> <input type="checkbox" name="cat" id="cat" />
+                        <label for="horse">cheval</label> <input type="checkbox" name="horse" id="horse" />
+                        <br />On peut aussi placer le label après et pourquoi pas sur plusieurs lignes : <br />
+                        <input type="checkbox" name="flower" id="flower" /> <label for="flower">fleur</label> <br />
+                        <input type="checkbox" name="tower" id="tower" /> <label for="tower">tour</label> <br />
+                        <input type="checkbox" name="power" id="power" /> <label for="power">pouvoir</label> <br />
+                        <button id="checkbutton">Cases cochées</button>
+                    </p>
+                    <p>
+                        Dans quelle tranche d'age vous situez vous? <br />
+                        <input type="radio" name="age" id="under15" value="under15" /> <label for="under15">moins de 15</label><br />
+                        <input type="radio" name="age" id="15to30" value="15to30" /> <label for="15to30">entre 15 et 30</label><br />
+                        <input type="radio" name="age" id="over30" value="over30" /> <label for="over30">plus de 30</label><br />
+                        <button id="radiobutton">Radio selectionné</button>
+                    </p>
+                    <p>
+                        <label for="console">choisi ta console</label> <br />
+                        <select name="console" id="console">
+                            <option value="xbox">Xbox</option>
+                            <option value="play">Playstation</option>
+                            <option value="switch">Nintendo Switch</option>
+                            <option value="other">autre</option>
+                        </select>
+                    </p>
+        
+                    <p>
+                        <label for="pays">Dans quel pays habitez-vous ?</label><br />
+                        <select name="pays" id="pays">
+                            <optgroup label="Europe">
+                                <option value="france">France</option>
+                                <option value="espagne">Espagne</option>
+                                <option value="italie">Italie</option>
+                                <option value="royaume-uni">Royaume-Uni</option>
+                            </optgroup>
+                            <optgroup label="Amérique">
+                                <option value="canada">Canada</option>
+                                <option value="etats-unis">Etats-Unis</option>
+                            </optgroup>
+                            <optgroup label="Asie">
+                                <option value="chine">Chine</option>
+                                <option value="japon">Japon</option>
+                            </optgroup>
+                        </select>
+                    </p>
+        
+                    <input type="submit" value="Soumettre">  
+                    <input type="reset" value="Annuler"> <br />
+                    <input type="image" src="images/mini/robot.png" value="Envoyer">
+                </form>
+            </header>
+
+            <section>
+                <article>
+                    <aside>
+
+                    </aside>
+                </article>
+                <article>
+                    
+                </article>
+            </section>
+
+            <footer>
+
+            </footer>
+        </div>  
+        <script type="text/Javascript" src="testform.js">
+            
+        </script>
+    </body>
+</html>
