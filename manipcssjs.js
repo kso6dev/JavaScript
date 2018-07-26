@@ -109,4 +109,16 @@ function enddrag(e){
     init(); // On initialise le code avec notre fonction toute prête.
 })();
 */
+
+
+//pour tester debug
+var dynlist = document.getElementById("dynlist");
+var li, litxt;
+for (var i = 0; i < 5; i++){
+    li = document.createElement("li");
+    litxt = document.createTextNode("element n° " + (i + 1));
+    li.appendChild(litxt);
+    dynlist.appendChild(li);
+};
+
 alert("fin");
