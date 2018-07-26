@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="tpdynformstyle.css">
+        <meta charset="utf-8">
+        <title>Formulaire dynamique</title>
+    </head>
+    <body>
+        <div id="main_wraper">
+            <header>
+                <h1>TP Form dynamique</h1>
+            </header>
+            <section id="intro">
+                <article>
+                    <p>Voici un TP pour rendre un form dynamique à l'aide de JavaScript.</p>
+                    <p>Cela va me permettre de réviser aussi HTML 5 et CSS 3.</p>
+                </article>
+                <aside>
+                    <h3>A propos de moi:</h3>
+                    <p>Je m'appelle Benjamin, j'ai 31 ans et je suis développeur.</p>
+                </aside>
+            </section>
+
+            <section id="TP">
+                <article>
+                        <p>Vous trouverez ci-dessous un formulaire d'inscription et les infos que vous saisirez seront vérifiées via Javascript.</p>
+                </article>
+                <form action="push" method="pagepost.php">
+                    <fieldset>
+                        <p>
+                            <legend>Infos personnelles</legend>
+                            <br/>
+                            <label for="mr">Mr.</label> <input name="sex" id="mr" type="radio"/>    <label for="mm">Mme.</label> <input name="sex" id="mm" type="radio"/>
+                            <br/>
+                            <label for="lastname">Nom: </label> <input name="lastname" id="lastname" type="text" /> 
+                            <br/>
+                            <label for="firstname">Prénom: </label> <input name="firstname" id="firstname" type="text" />
+                            <br/>
+                            <label for="age">Age: </label> <input name="age" id="age" type="text" />
+                            <br/>
+                            <label for="pseudo">Pseudo: </label> <input name="pseudo" id="pseudo" type="text" />
+                        </p>
+                    </fieldset>
+                    <fieldset>
+                        <p>
+                            <legend>Sécurité</legend>
+                            <br/>
+                            <label for="password">Mot de passe: </label> <input name="password" id="password" type="password" />
+                            <br/>
+                            <label for="pwconfirm">Confirmez votre mot de passe: </label> <input name="pwconfirm" id="pwconfirm" type="password" />
+                            <br/>
+                        </p>
+                    </fieldset>
+                    <fieldset>
+                        <p>
+                            <legend>Options</legend>
+                            <br/>
+                            <label for="country">Pays: </label> <select name="country" id="country">
+                                <option value="empty">          </option>
+                                <option value="Allemagne">Allemagne</option>
+                                <option value="Angleterre">Angleterre</option>
+                                <option value="Belgique">Belgique</option>
+                                <option value="Espagne">Espagne</option>
+                                <option value="France">France</option>
+                                <option value="Italie">Italie</option>
+                                <option value="Portugal">Portugal</option>
+                                <option value="Suisse">Suisse</option>
+                            </select>
+                            <br/>
+                            <label for="newsletter">Abonnement newsletter: </label> <input name="newsletter" id="newsletter" type="checkbox" />
+                        </p>
+                    </fieldset>
+                </form>
+            </section>
+            
+            <footer>
+
+            </footer>
+            <script type="text/Javascript" src="tpdynform.js">
+            </script>
+        </div>
+
+    </body>
+</html>
