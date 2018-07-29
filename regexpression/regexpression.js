@@ -100,12 +100,6 @@ console.log(/Le [1-9][a-z]{2,3} septembre/i.test("Le 1er septembre"));//true
 console.log(/Le [1-9][a-z]{3} septembre/i.test("Le 1er septembre"));//false
 console.log(/Les [1-9][a-z]{3} septembres/i.test("Les 1ers septembres"));//true
 
-//test d'une adresse mail fr
-console.log(/[a-z1-9]+@[a-z]+.fr/i.test("boulben@hotmail.fr"));//true
-console.log(/[a-z1-9]+@[a-z]+.fr/i.test("boulben68@hotmail.fr"));//true
-console.log(/[a-z1-9]+@[a-z]+.fr/i.test("boulben68@hotmail.com"));//false
-console.log(/[a-z1-9]+@[a-z]+.fr/i.test("boulben68.hotmail.fr"));//false
-
 //liste complète des métacaractères
 //! ^ $ () [] {} ? + * . / \ |
 //pour chercher un caractère qui est un métacaractère
@@ -141,5 +135,100 @@ console.log(/kaiser\W/i.test("kaiser_"));//true
 //\b trouve une limite de mot
 console.log(/bonjour\b ça\b va/i.test("bonjour ça va"));
 //\B ne trouve pas de limite de mot
+
+
+//APPLICATIONS DES REGEX
+
+//VERIF ADRESSE EMAIL
+var verifMailregex = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/;
+var mailadd = "";
+do{
+    mailadd = prompt("saisis une adresse mail valide", "boulben68@hotmail.fr");
+} while(!verifMailregex.test(mailadd));
+
+//ON PEUT DECLARER UNE VAR REGEX VIA OBJ OU TYPE PRIMITIF
+var myRegex1 = /^raclette$/i;
+var myRegex2 = new RegExp("^raclette$","i");
+
+//a part test() il y a méthode exec() qui retourne
+//un tableau dont premier élément est chaine trouvée
+//si rien trouvé, tableau null
+var sentence = "si ton tonton";
+var result = /\bton\b/.exec(sentence);//on cherche le mot ton
+if (result){ //if not null
+    console.log("result");
+}
+
+//9 propriétés: $1 à $9 qui peuvent contenir les 
+//chaines capturées via parenthèses capturantes
+var birth = "Je suis né en novembre";
+/^Je suis né en (\S+)$/.exec(birth);
+console.log(RegExp.$1);//affiche novembre
+//ici on constate que la var globale RegExp a été maj
+//on peut donc récupérer plusieurs valeurs:
+var email = prompt("saisis un mail","boulben68@hotmail.fr");
+if (/^([a-z0-9._-]+)@([a-z0-9._-]+)\.([a-z]{2,6})$/.test(email)){
+    console.log("partie locale: " + RegExp.$1 + "\nDomaine: " + RegExp.$2 + "\nExtension: " + RegExp.$3);
+}
+
+//?: permet de rendre une parenthèse non capturante:
+myRegex1 = /(?:https|http|ftp|steam):\/\//;
+
+//les recherches non-greedy
+var html = '<a href="www.mon-adresse.be">Mon site</a>';
+/<a href="(.+)">/.exec(html);
+console.log(RegExp.$1);//www.mon-adresse.be
+html = '<a href="www.mon-adresse.be"><strong class="web"><Mon site</a>';
+/<a href="(.+)">/.exec(html);
+console.log(RegExp.$1);//www.mon-adresse.be"><strong class="web
+//le ? non-greedy permet de chercher une fois et
+//non pas le max du .+
+/<a href="(.+?)">/.exec(html);
+console.log(RegExp.$1);//www.mon-adresse.be
+
+//Rechercher et remplacer
+sentence = "je m'appelle sebastien";
+console.log(sentence);
+sentence = sentence.replace(/sebastien/, "benjamin");
+console.log(sentence);
+//option g pour rechercher toutes les occurences
+sentence = "je m'appelle Sebastien et mon bof Sebastien";
+console.log(sentence);
+sentence = sentence.replace(/Sebastien/, "Benjamin");
+console.log(sentence);
+sentence = sentence.replace(/Sebastien/g, "Benjamin");
+console.log(sentence);
+//rechercher et capturer pour remplacer
+var date = "05/26/2011";
+console.log(date);
+date = date.replace(/^(\d{2})\/(\d{2})\/(\d{4})$/, "date fr = le $2/$1/$3");
+console.log(date);
+//pour placer un signe $ il faut le doubler avec $
+var total = "j'ai 25 dollars en liquide";
+console.log(total);
+total = total.replace(/dollars?/, "$$");
+console.log(total);
+
+//conversion BBCode vers HTML
+var textBBCode = 'bla bla [b]un peu de texte[/b] bla [b]bla bla en gras[/b] bla bla';
+console.log(textBBCode);
+var textHTML = textBBCode.replace(/\[b\]([\s\S]*?)\[\/b\]/g, '<strong>$1</strong>');
+console.log(textHTML);
+
+//search() fonctionne comme indexOf() mais avec une regex
+sentence = "salut les loosers";
+console.log(sentence.search(/\bloosers\b/));//10
+console.log(sentence.search(/\bwinners\b/));//-1
+//match() fonctionne comme search() sauf que retourne tableau
+sentence += " vous etes des loosers bande de loosers";
+console.log(sentence);
+result = sentence.match(/\bloosers\b/g);
+console.log("il y a  " + result.length + " loosers: " + result);
+//split() peut s'utiliser avec un regex
+//pratique pour découper selon plusieurs séparateurs
+var family = 'Guillaume,Pauline;Clarisse:Arnaud;Benoît;Maxime';
+console.log(family);
+var result = family.split(/[,:;]/);
+console.log(result);
 
 console.log("fin");
