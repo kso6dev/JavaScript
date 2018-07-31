@@ -1,0 +1,21 @@
+#overlay{
+    display: none;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    text-align: center;/*pour centrer img que overlay contiendra*/
+    background-color: rgba(0,0,0,0.6);/*noir mi opaque*/
+}
+
+#overlay img{
+    margin-top: 100px;
+}
+
+p{
+    margin-top: 10px;
+    text-align: center;
+}
+.divs{
+    background-color: blue;
+    display: none;
+}
