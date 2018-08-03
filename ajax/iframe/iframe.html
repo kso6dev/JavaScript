@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="iframe.css">
+        <title>iframe</title>
+    </head>
+    <body>
+        <div id="main_wrapper">
+            <header>
+
+            </header>
+            <section>
+                <article>
+                    <p>
+                       Plus bas une iframe contenant mon cv qui a perdu style et image mais on s'en fout
+                    </p>
+                    <input type="button" name="chgsrc" id="chgsrc" value="change src">
+                    <iframe id="myframe" src="chaut_benjamin_cv.html" frameborder="1"></iframe>
+                </article>
+                <aside>
+
+                </aside>
+                <article>
+                    <p>Plus bas un form qui envoie dans un iframe</p>
+                    <form id="myForm" method="post" action="request.php" target="myFrame2">
+                        <div>
+                            <input type="text" value="hello" />
+                            <input type="submit" value="Envoyer" />
+                        </div>
+                    </form>
+                    <iframe src="#" name="myFrame2" id="myFrame2" frameborder="2"></iframe>
+                </article>
+                <article>
+                    <p>Plus bas un form d'upload avec un iframe qui affiche le contenu uploaded</p>
+                    <form id="uploadForm" enctype="multipart/form-data" action="upload.php" target="uploadFrame" method="post">
+                        <label for="uploadFile">Image :</label>
+                        <input id="uploadFile" name="uploadFile" type="file" />
+                        <br /><br />
+                        <input id="uploadSubmit" type="submit" value="Upload !" />
+                    </form>
+                    <div id="uploadInfos">
+                        <div id="uploadStatus">Aucun upload en cours</div>
+                        <iframe id="uploadFrame" name="uploadFrame"></iframe>
+                    </div>
+                </article>
+            </section>
+            <footer>
+
+            </footer>
+        </div>
+        <script type="text/Javascript" src="iframe.js"></script>
+    </body>
+</html>

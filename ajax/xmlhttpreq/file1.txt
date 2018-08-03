@@ -1,0 +1,2 @@
+voici le contenu de mon fichier file1.txt
+le but est de l'afficher dans la page html grâce à l'objet XMLHttpRequest

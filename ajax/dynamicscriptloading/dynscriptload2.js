@@ -1,0 +1,1 @@
+console.log("fichier dynscriptload2.js ajouté et exécuté après chargement de la page web");

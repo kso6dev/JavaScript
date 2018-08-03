@@ -1,0 +1,1 @@
+receiveMessage("ce message est envoyé par le serveur!");
