@@ -1,18 +1,74 @@
 var searchbox = document.getElementById("searchbox");
 searchbox.addEventListener("keyup", autocomplete);
+var previousValue, currentValue;
+var previousxhr = null;
+var divselected = -1;
+var divs;
+var divscount = 0;
 
 function autocomplete(e){
-    removeDivChilds();
+    currentValue = e.target.value;
+    if (currentValue !== previousValue)
+    {
+        divselected = -1;
+        removeDivChilds();
+        
+        if (previousxhr !== null)
+        {
+            if (previousxhr.readyState !== XMLHttpRequest.DONE)
+            {
+                previousxhr.abort();
+            }
+        }
+        previousxhr = sendRequest(e.target.value);
+    }
+    else
+    {
+        divs = document.querySelectorAll(".selected, .unselected");
+        divscount = divs.length;
+        if (e.keyCode == 40)//bas
+        {
+            if (divselected < divscount-1)
+            {
+                if (divselected > -1)
+                {
+                    divs[divselected].className = "unselected";
+                }
+                divselected++;
+                divs[divselected].className = "selected";
+            }
+        } 
+        else if (e.keyCode == 38)//haut
+        {
+            if (divselected > 0)
+            {
+                if (divselected > -1)
+                {
+                    divs[divselected].className = "unselected";
+                }
+                divselected--;
+                divs[divselected].className = "selected";
+            }
+        } 
+        else if (e.keyCode == 13)//entrée
+        {
+            e.target.value = divs[divselected].innerHTML;
+            removeDivChilds();
+        }
+    }
+    previousValue = currentValue;
+}//function autocomplete
 
-    console.log("event");
-    var searchword = e.target.value;
-    console.log(searchword);
-    
-    //encode parameter
-    searchword = encodeURIComponent(searchword);
-    
+function removeDivChilds(){
+    var divresults = document.getElementById("results");
+    divresults.innerHTML = "";
+    divresults.style.display = "none";
+}
+
+function sendRequest(searchword){
+    var param = encodeURIComponent(searchword);
     var xhr = new XMLHttpRequest();
-    xhr.open('GET','http://localhost/tests/tpautocompletion/autocomp.php?searchword='+searchword);
+    xhr.open('GET','http://localhost/tests/tpautocompletion/autocomp.php?searchword='+param);
 
     xhr.addEventListener('readystatechange',function(){
         switch (xhr.readyState)
@@ -49,19 +105,11 @@ function autocomplete(e){
         }//switch
     });//event readystatechange
     xhr.send(null);
-}//function autocomplete
-
-function removeDivChilds(){
-    var divresults = document.getElementById("results");
-    divresults.innerHTML = "";
-    divresults.style.display = "none";
+    return xhr;
 }
 
 function processResponse(xhr){
-    //console.log("headers : " + xhr.getAllResponseHeaders());
-    //console.log("Content-type header : " + xhr.getResponseHeader("Content-type"));
     var autoresults = xhr.responseText.split('|');
-    //console.log(autoresults);
     var nbofresults = autoresults.length;
     var divresults = document.getElementById("results");
     var newresultdiv, newresulttext;
@@ -76,6 +124,7 @@ function processResponse(xhr){
     for (var resultno = 0; resultno < nbofresults; resultno++)
     {
         newresultdiv = document.createElement("div");
+        newresultdiv.className = "unselected";
         newresulttext = document.createTextNode(autoresults[resultno]);
         newresultdiv.appendChild(newresulttext);
         divresults.appendChild(newresultdiv);
@@ -87,8 +136,10 @@ function processResponse(xhr){
         });
         newresultdiv.addEventListener("click", function(e){
             searchbox.value = e.target.innerHTML;
+            removeDivChilds();
         });
     }
 }//function processResponse
+
 
 console.log("fin autocomp");

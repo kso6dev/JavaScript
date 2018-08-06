@@ -8,7 +8,7 @@
     $resultArray = array();
     $dicolen = count($dicoArray);
     $searchword = $_GET["searchword"];
-    for ($dicocur = 0; $dicocur < $dicolen; $dicocur++)
+    for ($dicocur = 0; $dicocur < $dicolen && count($resultArray) < 5; $dicocur++)
     {
         if (stripos($dicoArray[$dicocur],$searchword) === 0)
         {
