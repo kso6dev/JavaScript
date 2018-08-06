@@ -1,0 +1,41 @@
+.selected {
+    color: blue;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.unselected {
+    color: black;
+    background-color: white;
+}
+body {
+    position: relative;
+    margin: 0px;
+}
+
+#main_wrapper {
+    position: relative;
+    margin: 0px;
+}
+
+header {
+    display: flex;
+    flex-direction: line;
+    position: relative;
+    left: 0px;
+    background-color: rgba(49, 49, 49, 0.1);
+    height: 100px;
+}
+
+#searchdiv {
+    position: relative;
+    left: 10px;
+}
+#results, #searchbox {
+    width: 250px;
+    border: 1px solid grey;
+    position: relative;
+    background-color: white;
+}
+#results {
+    box-shadow: 0px 4px 4px #1c1a19;
+}

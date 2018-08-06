@@ -10,7 +10,7 @@
     $searchword = $_GET["searchword"];
     for ($dicocur = 0; $dicocur < $dicolen; $dicocur++)
     {
-        if (stripos($dicoArray[$dicocur],$searchword) !== false)
+        if (stripos($dicoArray[$dicocur],$searchword) === 0)
         {
             array_push($resultArray, $dicoArray[$dicocur]);
         }
