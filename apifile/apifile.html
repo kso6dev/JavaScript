@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="apifile.css" />
+        <title>API File</title>
+    </head>
+    <body>
+        <div id="main_wrapper">
+            <header>
+                <h1>L'API File</h1>
+                <p>
+                    Auparavant, la gestion des fichiers était extrêmement limitée avec le JavaScript, les actions possibles étaient peu intéressantes, à la fois pour le développeur et l'utilisateur. 
+                    <br />
+                    En revanche, le HTML5 fournit maintenant une API nommée « File ». Celle-ci est nettement plus intéressante que ce à quoi nous étions limités avant son implémentation. 
+                    <br /> 
+                    Il est maintenant possible de manipuler un ou plusieurs fichiers afin de les uploader ou d'obtenir des informations, comme leur poids par exemple.
+                    <br />
+                    L'objectif de ce chapitre est de vous fournir un tour d'horizon de l'API File.
+                </p>
+                <p>
+                    L'API que nous allons découvrir n'est pas utilisable seule. Autrement dit, elle nécessite d'être appelée par diverses technologies permettant son accès et lui fournissant les fichiers qu'elle peut manipuler. 
+                    <br />
+                    Cette API a été conçue de cette manière afin d'éviter que ce ne soit vous, développeurs, qui choisissiez quel fichier lire sur l'ordinateur du client. 
+                    <br />
+                    Si cette sécurité n’existait pas, les conséquences pourraient être désastreuses.
+                </p>
+                <p>
+                    Sachez que l'API File ne vous permet pas, actuellement, d'écrire un fichier stocké sur l'ordinateur d'un client ! 
+                    <br />
+                    Vous ne pourrez que le lire ou bien l'uploader pour le modifier sur un serveur, l'écriture d'un fichier sur l'ordinateur du client est encore en cours d'étude à l'heure où nous écrivons ces lignes.
+                </p>
+            </header>
+            <section>
+                <div id="test">
+                    <input id="file" type="file" multiple />
+                </div>
+                <article>
+                    <p>
+                        il est bon de savoir qu'une interface désigne la structure de base de toutes les instanciations d'un seul et même objet.
+                        <br/>
+                        Ainsi si on parle, par exemple, d'une interface Blob, alors cela désigne une présentation des propriétés et des méthodes que l'on peut trouver dans les objets de type Blob.
+                        <br />
+                        Un objet de type Blob est une structure représentant des données binaires disponibles uniquement en lecture seule
+                        <br />
+                        Les objets File possèdent un nom bien représentatif puisqu'ils permettent de manipuler les fichiers. Leur particularité est qu'ils héritent des propriétés et méthodes des objets Blob, voilà pourquoi nous ne créerons quasiment jamais ces derniers par nous-mêmes.
+                        <br />
+                        nous allons aborder la lecture des fichiers grâce à l'objet FileReader. Son instanciation s'effectue sans aucun argument :
+                        <br />
+                        <mark>var reader = new FileReader();</mark>
+                        <br />
+                        Cet objet permet la lecture asynchrone de fichiers, et ce grâce à trois méthodes différentes :
+                        <br />
+                        <mark>readAsArrayBuffer()</mark> stocke les données dans un objet de type ArrayBuffer. Ces objets ont été conçus pour permettre l'écriture et la lecture de données binaires directement dans leur forme native, ils sont surtout utilisés dans des domaines exigeants tels que le WebGL. Il y a peu de chances pour que vous utilisiez un jour cette méthode.
+                        <br />
+                        <mark>readAsDataURL()</mark> Les données sont converties dans un format nommé DataURL. Ce format consiste à convertir toutes les données binaires d'un fichier en base64 pour ensuite stocker le résultat dans une chaîne de caractères. Cette dernière est complétée par la spécification du type MIME du fichier concerné. Les DataURL permettent donc de stocker un fichier sous forme d'une URL lisible par les navigateurs récents, leur utilisation est de plus en plus fréquente sur le Web
+                        <br />
+                        <mark>readAsText()</mark> Les données ne subissent aucune modification, elles sont tout simplement lues puis stockées sous forme d'une chaîne de caractères.
+                        <br />
+                        Ces trois méthodes prennent chacune en paramètre un argument de type Blob ou File. La méthode readAsText() possède un argument supplémentaire (et facultatif) permettant de spécifier l'encodage du fichier, qui s'utilise comme ceci :
+                        <br />
+                        <mark>reader.readAsText(file, 'UTF-8');</mark>
+                        <br />
+                        <mark>reader.readAsText(file, 'ISO-8859-1');</mark>
+                        <br />
+                        la lecture d'un fichier est asynchrone ! Il faut donc partir du principe que vous allez avoir plusieurs événements à votre disposition. Ces événements diffèrent peu de ceux que l'on rencontre avec la seconde version de l'objet XMLHttpRequest :
+                        <br />
+                        <mark>loadstart</mark>: la lecture vient de commencer
+                        <br />
+                        <mark>progress</mark>: se déclenche à intervalles réguliers durant la progression de la lecture. Fournit un obj en param possédant 2 propriétés: loaded et total
+                        <br />
+                        <mark>load</mark>: la lecture vient de se terminer avec succès
+                        <br />
+                        <mark>loadend</mark>: la lecture vient de se terminer avec ou sans succès
+                        <br />
+                        <mark>abort</mark>: se déclenche quand la lecture est interrompue par exemple avec la méthode abort()
+                        <br />
+                        <mark>error</mark>: se déclenche quand une erreur a été rencontrée. La propriété error contiendra alors un obj de type FileError
+                        <br />
+                        <mark>reader.result</mark> permet d'afficher le résultat de la lecture donc le contenu du fichier
+                        <br />
+                        <mark>reader.readyState</mark> permet de connaitre l'état de la lecture.
+                        <br />
+                        <mark>reader.readyState === reader.LOADING (=== 1)</mark>: La lecture est en cours
+                        <br />
+                        <mark>reader.readyState === reader.EMPTY (=== 0)</mark>: Aucune donnée n'a encore été chargée
+                        <br />
+                        <mark>reader.readyState === reader.DONE (=== 2)</mark>: Toutes les données ont été chargées
+                        <br />
+                    </p>                    
+                </article>
+                <article>
+                    <h3>Mise en pratique avec un outil de prévisualisation de fichiers</h3>
+                    <input id="fileprev" type="file" multiple />
+                    <div id="prev">
+
+                    </div>
+                </article>
+                <article>
+                    <h3>Upload de fichiers avec l'objet XMLHttpRequest</h3>
+                    <input id="fileupload" type="file" />
+                    <progress id="progress"></progress>
+                </article>
+            </section>
+            <footer>
+
+            </footer>
+        </div>
+        <script type="text/Javascript" src="apifile.js"></script>
+    </body>
+</html>
