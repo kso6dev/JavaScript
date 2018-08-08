@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="tpdrag.css">
+        <title>TP Drag & Drop</title>
+    </head>
+    <body>
+        <div id="main_wrapper">
+            <header>
+                <h1>TP Drag & Drop</h1>
+            </header>
+
+            <section>
+                <div class="dropper">
+                    <div class="draggable">1</div>
+                    <div class="draggable">2</div>
+                </div>
+                <div class="dropper">
+                    <div class="draggable">3</div>
+                    <div class="draggable">4</div>
+                </div>
+                <p>
+                    Nous n'avions pas encore étudié la méthode <mark>stopPropagation()</mark>, car celle-ci nécessite un cas concret d'utilisation, et nous en avons justement un ici !
+                    <br />
+                    Cette méthode sert à stopper la propagation des événements. Souvenez-vous des phases de capture et de bouillonnement étudiées dans le chapitre sur les événements ! Dans une phase de bouillonnement, si un élément enfant possède un événement du même type qu'un de ses éléments parents, alors son événement se déclenchera en premier, puis viendra celui de l'élément parent. La méthode <mark>stopPropagation()</mark> sert à brider ce fonctionnement.
+                    <br />
+                    Dans le cadre d'une phase de bouillonnement, en utilisant cette méthode dans l'événement de l'élément enfant, vous empêcherez alors l'élément parent d'exécuter son événement. Dans le cadre d'une phase de capture, en utilisant cette méthode sur l'élément parent, vous empêcherez alors l'élément enfant de déclencher son événement.
+                    <br />
+                    On peut donc empecher la propagation de l'event drop pour qu'il ne soit pas propagé du dropper (parent) vers l'élément draggable (enfant)
+                    <br />
+                    En créant l'évent drop sur l'élément avec instruction: <mark>e.stopPropagation()</mark>
+                    <br />
+                    MAIS C'EST CONTRAIGNANT CAR ON NE PEUT DONC PLUS DROP SUR UN ELEMENT DE LA ZONE DE DROP..
+                    <br />
+                    La solution est donc de remonter les éléments parents avec <mark>parentNode</mark> jusqu'à tomber sur une zone de drop
+                </p>
+            </section>
+            
+            <footer>
+
+            </footer>
+        </div>
+        <script type="text/Javascript" src="tpdrag.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="draganddrop.css" />
+        <title>Drag and Drop</title>
+    </head>
+    <body>
+        <div id="main_wrapper">
+            <header>
+                <h1>Le Drag & Drop</h1>
+                <p>
+                    Bien que le drag & drop ait longtemps existé sur les sites Web grâce au JavaScript, jamais un vrai système standard n'avait encore vu le jour jusqu'à ce que le HTML5 n'arrive. 
+                    <br />
+                    Grâce au HTML5, il est maintenant possible de permettre un déplacement de texte, de fichier ou d'autres éléments depuis n'importe quelle application jusqu'à votre navigateur.
+                </p>
+            </header>
+
+            <section>
+                <article>
+                    <h3>Rendre un élément déplaçable</h3>
+                    <div id="dragdiv" draggable="true" style="border: 1px solid black;">
+                        <p>
+                            Il suffit d'utiliser son attribut draggable.
+                            <br />
+                            Je suis contenu dans une div draggable="true" mais attention, sous Firefox je ne marche pas très bien avec juste cette propriété. Avec Chrome c'est mieux.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            API Drag & Drop fournit 8 events, l'élément déplaçable peut en utiliser 2:
+                            <br />
+                            <mark>dragstart</mark> se déclenche qd l'élément ciblé commence à être déplacé
+                            <br />
+                            <mark>dragend</mark> permet de signaler à l'objet déplacé que son déplacement est terminé, successfull or not
+                        </p>
+                        <p>
+                            <h3>Initialiser un déplacement avec l'objet dataTransfer</h3>
+                            L'obj <mark>dataTransfer</mark> est généralement utilisé au travers de 2 events: <mark>dragstart</mark> et <mark>drop</mark>.
+                            <br />
+                            Cet obj permet de définir et récupérer les info relatives au déplacement en cours d'exécution.
+                            <br />
+                            L'objet <mark>dataTransfer</mark> permet de réaliser 3 actions (toutes facultatives):
+                            <ul>
+                                <li>sauvegarder une chaine de caractères qui sera transmise à l'élément HTML qui accueillera l'élément déplacé.
+                                    <br />
+                                    La méthode à utiliser est <mark>setData()</mark>.
+                                </li>
+                                <li>
+                                    définir une image utilisée lors du déplacement.
+                                    <br />
+                                    La méthode concernée est <mark>setDragImage()</mark>.
+                                </li>
+                                <li>
+                                    spécifier le type de déplacement autorisé avec la propriété <mark>effectAllowed</mark>.
+                                </li>
+                            </ul>
+                            La méthode <mark>setData()</mark> prend deux arguments en paramètres. Le premier est le type MIME des données (sous forme de chaîne de caractères) que vous allez spécifier dans le deuxième argument. Précisons que le deuxième argument est obligatoirement une chaîne de caractères, ce qui signifie que le type MIME qui sera spécifié n'a que peu d'intérêt, vous utiliserez généralement le type <mark>text/plain</mark> pour des raisons de simplicité :
+                            <br />
+                            draggableElement.addEventListener('dragstart', function(e) {
+                            <br />
+                            e.dataTransfer.setData('text/plain', "Ce texte sera transmis à l'élément HTML de réception");
+                            <br />
+                            });
+                        </p>
+                        <div id="dragme">
+
+                        </div>
+                        <p>
+                            le Drag & Drop en HTML5 possède la faculté de s'étendre bien au-delà de votre page Web actuelle et donc de faire un glisser-déposer d'une page à une autre, que ce soit d'un onglet à un autre ou bien même d'un navigateur à un autre ! 
+                            <br />
+                            Le transfert de données entre les pages Web n'étant pas possible (tout du moins pas sans « tricher »), il est utile d'utiliser la méthode <mark>setData()</mark>
+                            <br />
+                            Attention, l'utilisation de la méthode setData() est obligatoire avec Firefox ! Cela est stupide, car nous n'avons pas forcément quelque chose à y stocker, mais nous n'avons pas trop le choix. Utilisez donc le type MIME de votre choix et passez-lui une chaîne de caractères vide, comme ceci : <mark>setData('text/plain', '');</mark>.
+                        </p>
+                        <p>
+                            <h3>Définir une zone de "drop"</h3>
+                            Un élément en cours de déplacement ne peut pas être déposé n'importe où, il faut pour cela définir une zone de « drop » (zone qui va permettre de déposer des éléments) qui ne sera, au final, qu'un simple élément HTML.
+                            <br />
+                            <ul>
+                                Les zones de drop prennent généralement en charge 4 évents:
+                                <li><mark>dragenter</mark> qui se déclenche lorsqu'un élément en cours de déplacement entre dans la zone de drop</li>
+                                <li><mark>dragover</mark> qui se déclenche lorsqu'un élément en cours de déplacement se déplace dans la zone de drop</li>
+                                <li><mark>dragleave</mark> qui se déclenche lorsqu'un élément en cours de déplacement quitte la zone de drop</li>
+                                <li><mark>drop</mark> qui se déclenche lorsqu'un élément en cours de déplacement est déposé dans la zone de drop</li>
+                            </ul>
+                            Par défaut, le navigateur interdit de déposer un quelconque élément ou que ce soit dans la page Web. Nous devons donc annuler cette action par défaut donc <mark>preventDefault()</mark>!
+                            <br />
+                            Nous l'utiliserons au travers de l'évent <mark>dragover</mark>
+                        </p>
+                    </div>
+                    <div id="dropper">
+                        <h3>Je suis une zone de drop!</h3>
+
+                    </div>
+                    <div>
+                        <p>
+                            <h3>Terminer un déplacement avec l'objet dataTransfer</h3>
+                            L'objet <mark>dataTransfer</mark> a 2 rôles importants lors de la fin d'un drag & drop:
+                            <br />
+                            - récupérer grâce à la méthode <mark>getData()</mark> le texte sauvegardé par <mark>setData()</mark> lors de l'initialisation du drag & drop. 
+                            <br />
+                            - récupérer les éventuels fichiers qui ont été déposés par l'utilisateur car le drag & drop de fichiers est maintenant possible en HTML5!
+                            <br />
+                            Cela fonctionne plus ou moins de la même manière qu'avec une balise input type="file", il nous faut toujours accéder à une propriété <mark>files</mark> sauf que celle-ci est accessible dans l'objet <mark>dataTransfer</mark> dans le cadre d'un drag & drop.
+                        </p>
+                    </div>
+                </article>
+            </section>
+
+            <footer>
+
+            </footer>
+        </div>
+
+        <script type="text/Javascript" src="draganddrop.js"></script>
+    </body>
+</html>
