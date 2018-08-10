@@ -1,0 +1,134 @@
+#main_wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+#playzone, #sidemenu{
+    margin: 10px 10px 10px 10px;
+    background-color: #555;
+    border: 1px solid #111;
+    border-radius: 10px;
+    height: 600px;
+    transition: all 200ms linear;
+}
+#playzone{
+    flex: 4;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+    align-content: space-around;
+
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+}
+#sidemenu{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: space-around;
+}
+.dropper, #randomnum, .hidden{
+    flex: 0 0 auto;
+    margin: 2px 0px 0px 0px;
+	/*display: block;  /* IE fix */
+	
+	/* Inline-block fallback */
+    /*display: inline-block;
+    */
+    letter-spacing: normal;
+    text-rendering: auto;
+
+    color: white;
+    /*background-color: #822520;*/
+    border: 4px solid #3D110F;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 10px;
+    transition: all 200ms linear;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropper, .hidden, .red_dropper{
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+}
+
+.red_dropper{
+    flex: 0 0 auto;
+    margin: 2px 0px 0px 0px;
+	display: block;  /* IE fix */
+	
+	/* Inline-block fallback */
+    display: inline-block;
+    letter-spacing: normal;
+    text-rendering: auto;
+
+    color: white;
+    /*background-color: red;*/
+    border: 4px solid #3D110F;
+    text-align: center;
+    font-size: 2em;
+    border-radius: 10px;
+    transition: all 200ms linear;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop_hover{
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8) inset;
+}
+
+#randomnum{
+    width: 70%;
+    height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: move;
+    background-color: #822520;
+}
+
+#range, #score, #cost{
+    text-align: center;
+    font-size: 2em;
+}
+#range{
+    color: white;
+}
+#score{
+    color: gold;
+}
+#cost{
+    color: red;
+}
+#menu{
+    display: none;
+}
+.hidden{
+    /*background-color: #555;*/
+    color: #555;
+    border-color: #555;
+}
