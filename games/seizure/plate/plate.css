@@ -16,7 +16,6 @@
 
 .playzone{
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
 
     background-image: radial-gradient(circle at bottom right, rgba(223, 124, 236, 0.726), rgba(24, 8, 54, 0.788));
@@ -32,13 +31,13 @@
 
 .sidemenu{
     display: flex;
-
-    background-image: radial-gradient(circle at bottom left, rgba(223, 124, 236, 0.726), rgba(36, 15, 77, 0.788));
-
-    /*
+    
+    flex-wrap: wrap;
+    
     justify-content: space-around;
     align-content: space-around;
-    */
+    
+    background-image: radial-gradient(circle at bottom left, rgba(223, 124, 236, 0.726), rgba(36, 15, 77, 0.788));
 }
 
 .grid{
@@ -67,5 +66,80 @@
     text-shadow: 1em 1em 1em 1em white;
 }
 .cell_hovered{
-    background-color: rgba(21, 9, 70, 0.603);
+    background-image: linear-gradient(to bottom right, rgba(15, 7, 48, 0.903), rgba(15, 7, 44, 0.321));
+}
+.good_cell{
+    background-color: rgba(30, 224, 77, 0.403);
+}
+.bad_cell{
+    background-color: rgba(224, 30, 77, 0.403);
+}
+.good_cell_hovered{
+    background-image: linear-gradient(to bottom right, rgba(15, 100, 48, 0.903), rgba(15, 7, 44, 0.321));
+}
+.bad_cell_hovered{
+    background-image: linear-gradient(to bottom right, rgba(100, 7, 48, 0.903), rgba(15, 7, 44, 0.321));
+}
+
+.dice{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.range{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.score{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.cost{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.rerollgrid{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.rerolldice{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+}
+
+.timer{
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
 }

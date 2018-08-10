@@ -1,0 +1,33 @@
+body{
+    width: 100%;
+    height: 600px;
+    margin: 0px;
+    padding: 0px;
+
+}
+#main_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom right, blue, red);
+}
+.big_vert, .small_vert{
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.001));
+}
+.small_vert{
+    height: 60%;
+    flex:1;
+}
+.big_vert{
+    height: 80%;
+    flex: 2;
+}
+.medium_vert{
+    flex: 3;
+}
+#content{
+    flex: 24;
+    height: 100%;
+}
