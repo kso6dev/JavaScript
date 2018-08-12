@@ -27,12 +27,33 @@ var menu = document.getElementById("menu");
 //dynamic playzone elements
 var grid = document.createElement("div"); 
 
+//cells array for easy access
+var cells = [];
+
 //dynamic menu elements created and added to menuElements collection
 var menuElements = {};
-//dice
-var dice = document.createElement("div"); 
-menuElements.dice = dice; 
-menuElements.dice.className = "dice";
+
+//randomcell
+var randomcell_upup = document.createElement("div"); 
+menuElements.randomcell_upup = randomcell_upup; 
+menuElements.randomcell_upup.className = "randomcell_upup";
+
+var randomcell_up = document.createElement("div"); 
+menuElements.randomcell_up = randomcell_up; 
+menuElements.randomcell_up.className = "randomcell_up";
+
+var randomcell = document.createElement("div"); 
+menuElements.randomcell = randomcell; 
+menuElements.randomcell.className = "randomcell";
+
+var randomcell_down = document.createElement("div"); 
+menuElements.randomcell_down = randomcell_down; 
+menuElements.randomcell_down.className = "randomcell_down";
+
+var randomcell_downdown = document.createElement("div"); 
+menuElements.randomcell_downdown = randomcell_downdown; 
+menuElements.randomcell_downdown.className = "randomcell_downdown";
+
 //range
 var rangeDiv = document.createElement("div"); 
 menuElements.rangeDiv = rangeDiv;
@@ -41,18 +62,6 @@ menuElements.rangeDiv.className = "range";
 var scoreDiv = document.createElement("div"); 
 menuElements.scoreDiv = scoreDiv;
 menuElements.scoreDiv.className = "score";
-//cost
-var costDiv = document.createElement("div"); 
-menuElements.costDiv = costDiv;
-menuElements.costDiv.className = "cost";
-//reroll grid
-var rerollGridDiv = document.createElement("div");
-menuElements.rerollGridDiv = rerollGridDiv;
-menuElements.rerollGridDiv.className = "rerollgrid";
-//reroll dice
-var rerollDiceDiv = document.createElement("div"); 
-menuElements.rerollDiceDiv = rerollDiceDiv;
-menuElements.rerollDiceDiv.className = "rerolldice"
 //timer
 var timerDiv = document.createElement("div");
 menuElements.timerDiv = timerDiv; 
@@ -91,10 +100,39 @@ function initPlate(){
     
     //cells
     addCells(grid);
+}
 
-    //tests
-    defineElementStyle(grid.childNodes[0], "good_cell", false);
-    defineElementStyle(grid.childNodes[1], "bad_cell", false);
+function randomGridCells(){
+    var cellsLen = cells.length;
+    for (var i = 0; i < cellsLen; i++)
+    {
+        randomGridCell(cells[i]);
+    }
+}
+
+function randomGridCell(cell){
+    cell.innerHTML = Math.floor(Math.random() * 6);
+    colorGridCell(cell);
+}
+
+function colorGridCell(cell){
+    var className = cell.className;
+    var factor = parseInt(cell.innerHTML);
+    var rgbFactor = 255 / 5;
+    var blue = (5 - factor) * rgbFactor;
+    var red = factor * rgbFactor;
+      
+    cell.style.boxShadow = "1px 1px 1px 1px rgba(0, 1, 32, 0.692)";
+
+    if (className.indexOf("hovered") == -1)
+    {
+        cell.style.backgroundImage = "linear-gradient(to bottom right, rgba("+red+", 0, "+blue+", 0.533), rgba("+red+", 0, "+blue+", 0.021))";
+    }
+    else
+    {
+        cell.style.boxShadow = "0px 0px 0px 0px rgba(0, 1, 32, 0.692)";
+        cell.style.backgroundImage = "linear-gradient(to bottom right, rgba("+red+", 7, "+blue+", 0.903), rgba(15, 7, 44, 0.321))";
+    }
 }
 
 function addCells(grid){
@@ -104,14 +142,16 @@ function addCells(grid){
         cell.addEventListener("mouseenter", function(e){
             var cell = e.target;
             defineElementStyle(cell, cell.className+"_hovered", false);
+            colorGridCell(cell);
         });
         cell.addEventListener("mouseleave", function(e){
             var cell = e.target;
-            defineElementStyle(cell, cell.className.replace("_hovered",""), true);
+            defineElementStyle(cell, "cell", true);
+            colorGridCell(cell);
         });
-        cell.innerHTML = Math.floor(Math.random() * 6);
-        defineElementStyle(cell, "cell", true);
+        defineElementStyle(cell,"cell",true);
         grid.appendChild(cell);
+        cells.push(cell);
     }
 }
 
@@ -124,9 +164,6 @@ function defineElementStyle(element, className, replaceClassName){
     }
     
     switch(className){
-        case "cell_hovered":
-            element.style.backgroundImage = "linear-gradient(to bottom right, rgba(15, 7, 48, 0.903), rgba(15, 7, 44, 0.321))";
-            break;
         case "main_wrapper":
             element.style.flexDirection = orientation;
             break;
@@ -143,44 +180,27 @@ function defineElementStyle(element, className, replaceClassName){
         case "cell":
             element.style.width = "calc(" + cellWidth +"% - 4px)";
             element.style.height = "calc(" + cellHeight +"% - 4px)";
-            var factor = parseInt(element.innerHTML);
-            var rgbFactor = 255 / 5;
-            var blue = (5 - factor) * rgbFactor;
-            var red = factor * rgbFactor;
-            element.style.backgroundImage = "linear-gradient(to bottom right, rgba("+red+", 0, "+blue+", 0.533), rgba("+red+", 0, "+blue+", 0.021))";
             break;
-        case "dice":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight +"% - 4px)";
-            break;
-        case "range":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
+        case "randomcell_upup":
+        case "randomcell_downdown":
+            element.style.width = "calc(" + menuElementWidth/2 +"% - 4px)";
             element.style.height = "calc(" + cellHeight/2 +"% - 4px)";
             break;
-        case "score":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight/3 +"% - 4px)";
+        case "randomcell_up":
+        case "randomcell_down":
+            element.style.width = "calc(" + menuElementWidth/1.5 +"% - 4px)";
+            element.style.height = "calc(" + cellHeight/1.5 +"% - 4px)";
             break;
-        case "cost":
+        case "randomcell":
             element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight/4 +"% - 4px)";
-            break;
-        case "rerollgrid":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + menuElementHeight +"% - 4px)";
-            break;
-        case "rerolldice":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + menuElementHeight +"% - 4px)";
-            break;
-        case "timer":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + menuElementHeight +"% - 4px)";
+            element.style.height = "calc(" + cellHeight +"% - 4px)";
             break;
     }
     
 }
 
 initPlate();
+//start
+randomGridCells();
 
 console.log("fin poc");

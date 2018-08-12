@@ -1,0 +1,92 @@
+.main_wrapper{
+    display: flex;
+    margin: 0px 0px 0px 0px;
+}
+
+.playzone, .sidemenu{
+    height: 480px;
+    margin: 1px 1px 1px 1px;
+    border: 2px solid rgba(24, 8, 54, 0.548);
+    border-radius: 10px;
+}
+
+.playzone{
+    display: flex;
+    flex-wrap: wrap;
+    background-image: radial-gradient(circle at bottom right, rgba(223, 124, 236, 0.726), rgba(24, 8, 54, 0.788));
+}
+
+.sidemenu{
+    display: flex;
+    background-image: radial-gradient(circle at bottom left, rgba(223, 124, 236, 0.726), rgba(36, 15, 77, 0.788));
+}
+
+.grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    border-radius: 10px;
+}
+
+.cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+
+    color: rgba(255, 255, 255, 0.658);
+    font-style: oblique;
+    font-weight: 500;
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(21, 9, 70, 0.403),
+             -1px -1px 0 rgba(21, 9, 70, 0.403);
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.cell_hovered{
+    background-image: linear-gradient(to bottom right, rgba(15, 7, 48, 0.903), rgba(15, 7, 44, 0.321));
+}
+
+.randomcell, .randomcell_up, .randomcell_upup, .randomcell_down, .randomcell_downdown{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: rgba(21, 9, 70, 0.403);
+    border: 1px solid rgba(184, 184, 184, 0.229);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+
+    margin: 1px;
+
+    color: rgba(255, 255, 255, 0.658);
+    font-style: oblique;
+    font-weight: 500;
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(21, 9, 70, 0.403),
+             -1px -1px 0 rgba(21, 9, 70, 0.403);
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
