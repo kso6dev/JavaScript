@@ -1,33 +1,32 @@
-.main_wrapper{
+#main_wrapper{
     display: flex;
     margin: 0px 0px 0px 0px;
+    background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(204, 124, 200, 0.8),rgba(104, 124, 200, 0.6));
+    border-radius: 10px;
 }
 
-.playzone, .sidemenu{
-    height: 480px;
-    margin: 1px 1px 1px 1px;
+#grid, #sidemenu{
+    display: flex;
+    height: 480px; /* TO CHANGE FOR ORIENTATION*/
     border: 2px solid rgba(24, 8, 54, 0.548);
     border-radius: 10px;
 }
 
-.playzone{
-    display: flex;
-    flex-wrap: wrap;
-    background-image: radial-gradient(circle at bottom right, rgba(223, 124, 236, 0.726), rgba(24, 8, 54, 0.788));
-}
-
-.sidemenu{
-    display: flex;
-    background-image: radial-gradient(circle at bottom left, rgba(223, 124, 236, 0.726), rgba(36, 15, 77, 0.788));
-}
-
-.grid{
-    display: flex;
+#grid{
     flex-direction: row;
+    flex: 4;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-around;
+    margin: 1px 1px 1px 1px;
     border-radius: 10px;
+    background-image: radial-gradient(circle at bottom right, rgba(223, 124, 236, 0.726), rgba(24, 8, 54, 0.788));
+}
+
+#sidemenu{
+    flex: 1;
+    margin: 1px 1px 1px 20px;
+    background-image: radial-gradient(circle at bottom left, rgba(223, 124, 236, 0.726), rgba(36, 15, 77, 0.788));
 }
 
 .cell{
@@ -62,22 +61,73 @@
     background-image: linear-gradient(to bottom right, rgba(15, 7, 48, 0.903), rgba(15, 7, 44, 0.321));
 }
 
-.randomcell, .randomcell_up, .randomcell_upup, .randomcell_down, .randomcell_downdown{
+#sidemenubuttons, #menu_numbers, #range, #gameinfo{
+    display: flex;
+    color: rgba(255, 255, 255, 0.658);
+    font-style: oblique;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(21, 9, 70, 0.403),
+             -1px -1px 0 rgba(21, 9, 70, 0.403);
+}
+#range, #logo{
+    flex: 0.5;
+}
+#sidemenubuttons, #gameinfo{
+    flex: 1;
+}
+#menu_numbers{
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+}
+
+.smallnum, .mediumnum, .normalnum{
     display: flex;
     align-items: center;
     justify-content: center;
     
     background-color: rgba(21, 9, 70, 0.403);
-    border: 1px solid rgba(184, 184, 184, 0.229);
     border-radius: 10px;
     box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+}
+.smallnum{
+    flex: 2;
+    width: 40px;
+    font-weight: 150;
+    font-size: 0.8em;
+    border: 1px solid rgba(184, 184, 184, 0.229);
 
-    margin: 1px;
+    background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.3),rgba(144, 124, 200, 0.1));
+}
+.mediumnum{
+    flex: 3;
+    width: 50px;
+    font-weight: 225;
+    font-size: 1.2em;
+    border: 1px solid rgba(184, 184, 184, 0.229);
+
+    background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.5),rgba(144, 124, 200, 0.3));
+}
+.normalnum{
+    flex: 6;
+    width: 60px;
+    font-weight: 450;
+    font-size: 2.4em;
+    border: 2px solid rgba(184, 184, 184, 0.229);
+
+    background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.8),rgba(144, 124, 200, 0.6));
+}
+.num1, .num2, .num3, .num4, .num5{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
 
     color: rgba(255, 255, 255, 0.658);
     font-style: oblique;
-    font-weight: 500;
-    font-size: 2.5em;
+
     text-align: center;
     text-shadow: 1px 1px 0 rgba(21, 9, 70, 0.403),
              -1px -1px 0 rgba(21, 9, 70, 0.403);
@@ -89,4 +139,17 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+
+.num1, .num5{
+    font-weight: 150;
+    font-size: 0.8em;
+}
+.num2, .num4{
+    font-weight: 225;
+    font-size: 1.2em;
+}
+.num3{
+    font-weight: 450;
+    font-size: 1.5em;
 }

@@ -1,6 +1,26 @@
-//parameters
+//existing elements
+var mainWrapper = document.getElementById("main_wrapper");
+var grid = document.getElementById("grid");
+var cells = document.querySelectorAll(".cell");
+var sideMenu = document.getElementById("sidemenu");
+var menuNumbers = document.getElementById("menu_numbers");
+var randomNumbersDiv = document.querySelectorAll(".num1, .num2, .num3, .num4, .num5");
+var sideMenuButtons = document.getElementById("sidemenubuttons");
+var sideMenuRange = document.getElementById("range");
+var sideMenuGameInfo = document.getElementById("gameinfo");
+var menu = document.getElementById("menu");
+
+//constants
 var nbOfCols = 5;
 var nb0fLines = 5;
+var nbOfCells = nbOfCols * nb0fLines;
+if (nbOfCells != cells.length)
+{
+    alert("oups! there is a problem with grid cells calculation");
+}
+var cellHeight = Math.floor(100 / nb0fLines);
+var cellWidth = Math.floor(100/ nbOfCols);
+
 var directions = new Map();
 directions.set("normal", "row"); directions.set("reverse", "row-reverse");
 directions.set("up", "column"); directions.set("down", "column-reverse");
@@ -9,109 +29,106 @@ var sideMenuOrientation = "column";
 if (orientation.indexOf("column") != -1){
     sideMenuOrientation = "row";
 }
-var playZoneFlex = 4;
-var gridFlex = 1;
-var sideMenuFlex = 1;
-
-//calculations depending on nbOfCols and nbOfLines
-var nbOfCells = nbOfCols * nb0fLines;
-var cellHeight = Math.floor(100 / nb0fLines);
-var cellWidth = Math.floor(100/ nbOfCols);
-
-//existing elements
-var mainWrapper = document.getElementById("main_wrapper");
-var playZone = document.getElementById("playzone");
-var sideMenu = document.getElementById("sidemenu");
-var menu = document.getElementById("menu");
-
-//dynamic playzone elements
-var grid = document.createElement("div"); 
-
-//cells array for easy access
-var cells = [];
-
-//dynamic menu elements created and added to menuElements collection
-var menuElements = {};
-
-//randomcell
-var randomcell_upup = document.createElement("div"); 
-menuElements.randomcell_upup = randomcell_upup; 
-menuElements.randomcell_upup.className = "randomcell_upup";
-
-var randomcell_up = document.createElement("div"); 
-menuElements.randomcell_up = randomcell_up; 
-menuElements.randomcell_up.className = "randomcell_up";
-
-var randomcell = document.createElement("div"); 
-menuElements.randomcell = randomcell; 
-menuElements.randomcell.className = "randomcell";
-
-var randomcell_down = document.createElement("div"); 
-menuElements.randomcell_down = randomcell_down; 
-menuElements.randomcell_down.className = "randomcell_down";
-
-var randomcell_downdown = document.createElement("div"); 
-menuElements.randomcell_downdown = randomcell_downdown; 
-menuElements.randomcell_downdown.className = "randomcell_downdown";
-
-//range
-var rangeDiv = document.createElement("div"); 
-menuElements.rangeDiv = rangeDiv;
-menuElements.rangeDiv.className = "range";
-//score
-var scoreDiv = document.createElement("div"); 
-menuElements.scoreDiv = scoreDiv;
-menuElements.scoreDiv.className = "score";
-//timer
-var timerDiv = document.createElement("div");
-menuElements.timerDiv = timerDiv; 
-menuElements.timerDiv.className = "timer"; 
 
 //side menu elements dimension
-var menuElementHeight = 100;
-var menuElementWidth = 100;
-var menuElementsLen = Object.keys(menuElements).length;
+var sideMenuElementHeight = 100;
+var sideMenuElementWidth = 100;
+var sideMenuElementsCount = 4;
 if (sideMenuOrientation == "row")
 {
-    menuElementWidth = Math.floor(100 / menuElementsLen);
+    sideMenuElementWidth = Math.floor(100 / sideMenuElementsCount);
 }
 else
 {
-    menuElementHeight = Math.floor(100 / menuElementsLen);
+    sideMenuElementHeight = Math.floor(100 / sideMenuElementsCount);
 }
 
-function initPlate(){
-    //main_wrapper
-    defineElementStyle(mainWrapper, "main_wrapper", true);
+//define elements orientation and dynamic dimensions depending on screen size and orientation
+defineDynamicElements(mainWrapper, "main_wrapper");
+defineDynamicElements(sideMenu, "sidemenu");
+defineDynamicElements(menuNumbers, "menu_numbers");
+defineDynamicElements(sideMenuButtons, "sidemenubuttons");
+defineDynamicElements(sideMenuGameInfo, "gameinfo");
 
-    //playzone
-    defineElementStyle(playZone, "playzone", true);
-    
-    //sidemenu
-    defineElementStyle(sideMenu, "sidemenu", true);
-    for (var element in menuElements){
-        defineElementStyle(menuElements[element], menuElements[element].className, true);
-        sideMenu.appendChild(menuElements[element]);
+function defineDynamicElements(element, className){
+    switch(className){
+        case "main_wrapper":
+            element.style.flexDirection = orientation;
+            break;
+        case "sidemenubuttons":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "gameinfo":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "sidemenu":
+            element.style.flexDirection = sideMenuOrientation;
+            element.style.width = "80%";
+            break;
+        case "menu_numbers":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "cell":
+            element.style.width = "calc(" + cellWidth +"% - 4px)";
+            element.style.height = "calc(" + cellHeight +"% - 4px)";
+            break;
     }
-
-    //grid
-    defineElementStyle(grid, "grid", true);
-    playZone.appendChild(grid);
-    
-    //cells
-    addCells(grid);
 }
 
-function randomGridCells(){
-    var cellsLen = cells.length;
-    for (var i = 0; i < cellsLen; i++)
-    {
-        randomGridCell(cells[i]);
+//initPlate adding grid cells with event and random numbers
+for (var i = 0; i < nbOfCells; i++)
+{
+    //define dimensions depending on screen size and orientation
+    defineDynamicElements(cells[i],"cell");
+    
+    //add cell events
+    cells[i].addEventListener("mouseenter", function(e){
+        var cell = e.target;
+        addClass(cell, " cell_hovered");
+        colorGridCell(cell);
+    });
+    cells[i].addEventListener("mouseleave", function(e){
+        var cell = e.target;
+        removeClass(cell, " cell_hovered");
+        colorGridCell(cell);
+    });
+
+    //define random number
+    randomGridCell(cells[i]);
+}
+
+//init random num wheel
+for (var i = 0; i < 5; i++)
+{
+    randomGridCell(randomNumbersDiv[i]);
+    if (i < 2){
+        randomNumbersDiv[i].addEventListener("click", wheelUp);
     }
+    if (i > 2){
+        randomNumbersDiv[i].addEventListener("click", wheelDown);
+    }
+}
+
+function wheelUp(e){
+    var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
+    randomGridCell(allRandomNumDivs[14]);
+    allRandomNumDivs[2].innerHTML = randomNumbersDiv[1].innerHTML;
+    allRandomNumDivs[5].innerHTML = randomNumbersDiv[2].innerHTML;
+    allRandomNumDivs[8].innerHTML = randomNumbersDiv[3].innerHTML;
+    allRandomNumDivs[11].innerHTML = randomNumbersDiv[4].innerHTML;
+}
+
+function wheelDown(e){
+    var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
+    randomGridCell(allRandomNumDivs[0]);
+    allRandomNumDivs[3].innerHTML = randomNumbersDiv[0].innerHTML;
+    allRandomNumDivs[6].innerHTML = randomNumbersDiv[1].innerHTML;
+    allRandomNumDivs[9].innerHTML = randomNumbersDiv[2].innerHTML;
+    allRandomNumDivs[12].innerHTML = randomNumbersDiv[3].innerHTML;
 }
 
 function randomGridCell(cell){
-    cell.innerHTML = Math.floor(Math.random() * 6);
+    cell.innerHTML = Math.floor(Math.random() * 5);
     colorGridCell(cell);
 }
 
@@ -122,7 +139,10 @@ function colorGridCell(cell){
     var blue = (5 - factor) * rgbFactor;
     var red = factor * rgbFactor;
       
-    cell.style.boxShadow = "1px 1px 1px 1px rgba(0, 1, 32, 0.692)";
+    if (className.indexOf("cell") != -1)
+    {
+        cell.style.boxShadow = "1px 1px 1px 1px rgba(0, 1, 32, 0.692)";
+    }
 
     if (className.indexOf("hovered") == -1)
     {
@@ -135,72 +155,13 @@ function colorGridCell(cell){
     }
 }
 
-function addCells(grid){
-    var cell;
-    for (var i = 0; i < nbOfCells; i++){
-        cell = document.createElement("div");
-        cell.addEventListener("mouseenter", function(e){
-            var cell = e.target;
-            defineElementStyle(cell, cell.className+"_hovered", false);
-            colorGridCell(cell);
-        });
-        cell.addEventListener("mouseleave", function(e){
-            var cell = e.target;
-            defineElementStyle(cell, "cell", true);
-            colorGridCell(cell);
-        });
-        defineElementStyle(cell,"cell",true);
-        grid.appendChild(cell);
-        cells.push(cell);
-    }
+function addClass(element, className){
+    element.className += className;
+}
+function removeClass(element, className){
+    element.className = element.className.replace(className,"");
 }
 
-function defineElementStyle(element, className, replaceClassName){
-    if (replaceClassName){
-        element.className = className;
-    }
-    else {
-        element.className += " " + className;
-    }
-    
-    switch(className){
-        case "main_wrapper":
-            element.style.flexDirection = orientation;
-            break;
-        case "playzone":
-            element.style.flex = playZoneFlex;
-            break;
-        case "sidemenu":
-            element.style.flex = sideMenuFlex;
-            element.style.flexDirection = sideMenuOrientation;
-            break;
-        case "grid":
-            element.style.flex = gridFlex;
-            break;
-        case "cell":
-            element.style.width = "calc(" + cellWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight +"% - 4px)";
-            break;
-        case "randomcell_upup":
-        case "randomcell_downdown":
-            element.style.width = "calc(" + menuElementWidth/2 +"% - 4px)";
-            element.style.height = "calc(" + cellHeight/2 +"% - 4px)";
-            break;
-        case "randomcell_up":
-        case "randomcell_down":
-            element.style.width = "calc(" + menuElementWidth/1.5 +"% - 4px)";
-            element.style.height = "calc(" + cellHeight/1.5 +"% - 4px)";
-            break;
-        case "randomcell":
-            element.style.width = "calc(" + menuElementWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight +"% - 4px)";
-            break;
-    }
-    
-}
 
-initPlate();
-//start
-randomGridCells();
 
-console.log("fin poc");
+console.log("fin five");
