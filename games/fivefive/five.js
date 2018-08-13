@@ -94,13 +94,13 @@ for (var i = 0; i < nbOfCells; i++)
     });
 
     //define random number
-    randomGridCell(cells[i]);
+    randomGridCell(cells[i], 0);
 }
 
 //init random num wheel
 for (var i = 0; i < 5; i++)
 {
-    randomGridCell(randomNumbersDiv[i]);
+    randomGridCell(randomNumbersDiv[i], 1);
     if (i < 2){
         randomNumbersDiv[i].addEventListener("click", wheelUp);
     }
@@ -111,24 +111,24 @@ for (var i = 0; i < 5; i++)
 
 function wheelUp(e){
     var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
-    randomGridCell(allRandomNumDivs[14]);
     allRandomNumDivs[2].innerHTML = randomNumbersDiv[1].innerHTML;
     allRandomNumDivs[5].innerHTML = randomNumbersDiv[2].innerHTML;
     allRandomNumDivs[8].innerHTML = randomNumbersDiv[3].innerHTML;
     allRandomNumDivs[11].innerHTML = randomNumbersDiv[4].innerHTML;
+    allRandomNumDivs[14].innerHTML = randomNumbersDiv[0].innerHTML;
 }
 
 function wheelDown(e){
     var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
-    randomGridCell(allRandomNumDivs[0]);
+    allRandomNumDivs[0].innerHTML = randomNumbersDiv[4].innerHTML;
     allRandomNumDivs[3].innerHTML = randomNumbersDiv[0].innerHTML;
     allRandomNumDivs[6].innerHTML = randomNumbersDiv[1].innerHTML;
     allRandomNumDivs[9].innerHTML = randomNumbersDiv[2].innerHTML;
     allRandomNumDivs[12].innerHTML = randomNumbersDiv[3].innerHTML;
 }
 
-function randomGridCell(cell){
-    cell.innerHTML = Math.floor(Math.random() * 5);
+function randomGridCell(cell, plus){
+    cell.innerHTML = Math.floor(Math.random() * 5 + plus);
     colorGridCell(cell);
 }
 

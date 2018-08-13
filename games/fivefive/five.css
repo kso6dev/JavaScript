@@ -88,7 +88,7 @@
     
     background-color: rgba(21, 9, 70, 0.403);
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 1, 32, 0.692);
+    box-shadow: 2px 2px 2px 2px rgba(0, 1, 32, 0.692);
 }
 .smallnum{
     flex: 2;
@@ -96,7 +96,7 @@
     font-weight: 150;
     font-size: 0.8em;
     border: 1px solid rgba(184, 184, 184, 0.229);
-
+    z-index: 1;
     background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.3),rgba(144, 124, 200, 0.1));
 }
 .mediumnum{
@@ -105,7 +105,7 @@
     font-weight: 225;
     font-size: 1.2em;
     border: 1px solid rgba(184, 184, 184, 0.229);
-
+    z-index: 2;
     background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.5),rgba(144, 124, 200, 0.3));
 }
 .normalnum{
@@ -114,7 +114,7 @@
     font-weight: 450;
     font-size: 2.4em;
     border: 2px solid rgba(184, 184, 184, 0.229);
-
+    z-index: 3;
     background-image: repeating-linear-gradient(-45deg,rgba(234, 124, 200, 0.3),rgba(134, 124, 200, 0.1),rgba(211, 171, 209, 0.8),rgba(144, 124, 200, 0.6));
 }
 .num1, .num2, .num3, .num4, .num5{
