@@ -80,6 +80,17 @@
     align-items: center;
     justify-content: center;
 }
+#gameinfo{
+    align-items: center;
+    justify-content: center;
+}
+#timer{
+    color: aliceblue;
+    width: 40px;
+    font-weight: 150;
+    font-size: 0.8em;
+    border: 1px solid rgba(184, 184, 184, 0.229);
+}
 
 .smallnum, .mediumnum, .normalnum{
     display: flex;

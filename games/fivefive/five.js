@@ -8,8 +8,15 @@ var randomNumbersDiv = document.querySelectorAll(".num1, .num2, .num3, .num4, .n
 var sideMenuButtons = document.getElementById("sidemenubuttons");
 var sideMenuRange = document.getElementById("range");
 var sideMenuGameInfo = document.getElementById("gameinfo");
+var sideMenuTimer = document.getElementById("timer");
 var menu = document.getElementById("menu");
+var playButton = document.getElementById("playbutton");
+var stopButton = document.getElementById("stopbutton");
 
+
+var wheel = new Wheel();
+var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
+    
 //constants
 var nbOfCols = 5;
 var nb0fLines = 5;
@@ -50,31 +57,6 @@ defineDynamicElements(menuNumbers, "menu_numbers");
 defineDynamicElements(sideMenuButtons, "sidemenubuttons");
 defineDynamicElements(sideMenuGameInfo, "gameinfo");
 
-function defineDynamicElements(element, className){
-    switch(className){
-        case "main_wrapper":
-            element.style.flexDirection = orientation;
-            break;
-        case "sidemenubuttons":
-            element.style.flexDirection = sideMenuOrientation;
-            break;
-        case "gameinfo":
-            element.style.flexDirection = sideMenuOrientation;
-            break;
-        case "sidemenu":
-            element.style.flexDirection = sideMenuOrientation;
-            element.style.width = "80%";
-            break;
-        case "menu_numbers":
-            element.style.flexDirection = sideMenuOrientation;
-            break;
-        case "cell":
-            element.style.width = "calc(" + cellWidth +"% - 4px)";
-            element.style.height = "calc(" + cellHeight +"% - 4px)";
-            break;
-    }
-}
-
 //initPlate adding grid cells with event and random numbers
 for (var i = 0; i < nbOfCells; i++)
 {
@@ -108,23 +90,123 @@ for (var i = 0; i < 5; i++)
         randomNumbersDiv[i].addEventListener("click", wheelDown);
     }
 }
+//keep random num wheel in array var with display info
+for (var i = 1; i < 16; i++)
+{
+    //wheelNumbers.push([randomNumbersDiv[Math.floor(i / 5)].innerHTML, false]);
+    wheel.wheelNumbers.push(new Object());
+    wheel.wheelNumbers[i-1].innerHTML = randomNumbersDiv[Math.floor((i-1) / 3)].innerHTML;
+    if ((i+1) % 3 == 0)
+    {
+        wheel.wheelNumbers[i-1].visible = true;
+        wheel.wheelNumbers[i-1].grow = 6;
+        wheel.wheelNumbers[i-1].shrink = 0;
+    }
+    else
+    {
+        wheel.wheelNumbers[i-1].visible = false;
+        wheel.wheelNumbers[i-1].grow = 0;
+        wheel.wheelNumbers[i-1].shrink = 6;
+    }
+}
+console.log(wheel);
 
-function wheelUp(e){
-    var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
-    allRandomNumDivs[2].innerHTML = randomNumbersDiv[1].innerHTML;
-    allRandomNumDivs[5].innerHTML = randomNumbersDiv[2].innerHTML;
-    allRandomNumDivs[8].innerHTML = randomNumbersDiv[3].innerHTML;
-    allRandomNumDivs[11].innerHTML = randomNumbersDiv[4].innerHTML;
-    allRandomNumDivs[14].innerHTML = randomNumbersDiv[0].innerHTML;
+//functions
+function defineDynamicElements(element, className){
+    switch(className){
+        case "main_wrapper":
+            element.style.flexDirection = orientation;
+            break;
+        case "sidemenubuttons":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "gameinfo":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "sidemenu":
+            element.style.flexDirection = sideMenuOrientation;
+            element.style.width = "80%";
+            break;
+        case "menu_numbers":
+            element.style.flexDirection = sideMenuOrientation;
+            break;
+        case "cell":
+            element.style.width = "calc(" + cellWidth +"% - 4px)";
+            element.style.height = "calc(" + cellHeight +"% - 4px)";
+            break;
+    }
 }
 
-function wheelDown(e){
-    var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
-    allRandomNumDivs[0].innerHTML = randomNumbersDiv[4].innerHTML;
-    allRandomNumDivs[3].innerHTML = randomNumbersDiv[0].innerHTML;
-    allRandomNumDivs[6].innerHTML = randomNumbersDiv[1].innerHTML;
-    allRandomNumDivs[9].innerHTML = randomNumbersDiv[2].innerHTML;
-    allRandomNumDivs[12].innerHTML = randomNumbersDiv[3].innerHTML;
+function wheelUp(e, loop){
+    var turn = false;
+    
+    for (var i = 0; i < 15; i++)
+    {
+        if (!loop)
+        {
+            if (i < 14)
+            {
+                wheelNumbers[i][0] = wheelNumbers[i+1][0];
+            }
+            else
+            {
+                wheelNumbers[i][0] = Math.floor(Math.random() * 5 + 1);
+            }
+            wheelNumbers[i][1] = ((i+1) % 3 == 0);
+        }
+    }
+
+    if (turn)
+    {
+        window.requestAnimationFrame(function() {wheelUp(e, true)});
+    }
+}
+
+function wheelDown(e, loop){
+    var turn = false;
+    var shrink = 0;
+    var grow = 0;
+
+    for (var i = 14; i >= 0; i--)
+    {
+        if (!loop)
+        {
+            if (i > 0)
+            {
+                wheelNumbers[i][0] = wheelNumbers[i-1][0];
+            }
+            else
+            {
+                wheelNumbers[i][0] = Math.floor(Math.random() * 5 + 1);
+            }
+            wheelNumbers[i][1] = (i % 3 == 0);
+        }
+
+        if (wheelNumbers[i][1])
+        {
+            if (allRandomNumDivs[i].style.flexGrow != "")
+            {
+                grow = parseInt(allRandomNumDivs[i].style.flexGrow);
+            }
+            grow++;
+            allRandomNumDivs[i].style.flexGrow = grow;
+        }
+        else
+        {
+            allRandomNumDivs[i].style.flexGrow = "0";
+            if (allRandomNumDivs[i].style.flexShrink != "")
+            {
+                shrink = parseInt(allRandomNumDivs[i].style.flexShrink);
+            }
+            shrink++;
+            allRandomNumDivs[i].style.flexShrink = shrink;
+        }
+    }
+    
+    if (turn)
+    {
+        window.requestAnimationFrame(function() {wheelDown(e, true)});
+    }
 }
 
 function randomGridCell(cell, plus){
@@ -162,6 +244,37 @@ function removeClass(element, className){
     element.className = element.className.replace(className,"");
 }
 
+//start playing
+(function(){
+    window.addEventListener("load", function(){
+        playButton.addEventListener("click", function() {play()});
+        stopButton.addEventListener("click", function() {stop()});
+        var playing = false;
+        var start, time;
 
+        function play(){
+            playing = true;
+            start = new Date().getTime();
+            updateTimer();    
+        }
+
+        function stop(){  
+            playing = false;
+        }
+
+        function updateTimer(){
+            if (playing)
+            {
+                time = new Date().getTime();
+                sideMenuTimer.innerHTML = Math.floor((time - start) / 1000);
+                window.requestAnimationFrame(function() {updateTimer()});
+            }
+            else
+            {
+                sideMenuTimer.innerHTML = 0;
+            }
+        }
+    });
+})();
 
 console.log("fin five");
