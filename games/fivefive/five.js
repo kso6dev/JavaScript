@@ -14,7 +14,7 @@ var playButton = document.getElementById("playbutton");
 var stopButton = document.getElementById("stopbutton");
 
 
-var wheel = new Wheel();
+//var wheel = new Wheel();
 var allRandomNumDivs = document.querySelectorAll("div[class^=num]");
     
 //constants
@@ -90,8 +90,9 @@ for (var i = 0; i < 5; i++)
         randomNumbersDiv[i].addEventListener("click", wheelDown);
     }
 }
+
 //keep random num wheel in array var with display info
-for (var i = 1; i < 16; i++)
+/*for (var i = 1; i < 16; i++)
 {
     //wheelNumbers.push([randomNumbersDiv[Math.floor(i / 5)].innerHTML, false]);
     wheel.wheelNumbers.push(new Object());
@@ -110,7 +111,7 @@ for (var i = 1; i < 16; i++)
     }
 }
 console.log(wheel);
-
+*/
 //functions
 function defineDynamicElements(element, className){
     switch(className){
